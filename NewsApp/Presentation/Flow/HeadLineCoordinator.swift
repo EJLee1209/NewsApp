@@ -29,12 +29,21 @@ final class HeadLineCoordinator: Coordinator {
         let headLineViewModel = HeadLineViewModelImpl(
             loadHeadLineArticlesUseCase: loadHeadLineArticlesUseCase
         )
-        let controller = HeadLineViewController(viewModel: headLineViewModel)
+        let controller = HeadLineViewController(
+            viewModel: headLineViewModel,
+            coordinator: self
+        )
         controller.title = "HeadLine"
         navigation.pushViewController(controller, animated: true)
         navigation.navigationBar.prefersLargeTitles = true
         
         window.rootViewController = navigation
         window.makeKeyAndVisible()
+    }
+}
+
+extension HeadLineCoordinator: HeadLineViewControllerCoordinator {
+    func didSelectArticle(_ article: Article) {
+        print("DEBUG: 선택된 아티클 \(article)")
     }
 }

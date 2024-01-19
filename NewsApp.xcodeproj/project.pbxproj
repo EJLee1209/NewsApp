@@ -49,6 +49,8 @@
 		CF3FAEBC2B5AA844000E90E1 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3FAEBB2B5AA844000E90E1 /* Reusable.swift */; };
 		CF3FAEBF2B5AB132000E90E1 /* SpinnerDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3FAEBE2B5AB132000E90E1 /* SpinnerDisplayable.swift */; };
 		CF3FAEC12B5AB151000E90E1 /* MessageDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3FAEC02B5AB151000E90E1 /* MessageDisplayable.swift */; };
+		CF3FAEC42B5AB245000E90E1 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3FAEC32B5AB245000E90E1 /* String+.swift */; };
+		CF3FAEC62B5AB28C000E90E1 /* ApiClientServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3FAEC52B5AB28C000E90E1 /* ApiClientServiceImpl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +113,8 @@
 		CF3FAEBB2B5AA844000E90E1 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
 		CF3FAEBE2B5AB132000E90E1 /* SpinnerDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerDisplayable.swift; sourceTree = "<group>"; };
 		CF3FAEC02B5AB151000E90E1 /* MessageDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDisplayable.swift; sourceTree = "<group>"; };
+		CF3FAEC32B5AB245000E90E1 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		CF3FAEC52B5AB28C000E90E1 /* ApiClientServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClientServiceImpl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -242,6 +246,7 @@
 		CF3FAE5B2B5A6CDE000E90E1 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				CF3FAEC22B5AB23C000E90E1 /* Extension */,
 				CF3FAEBD2B5AB11D000E90E1 /* Components */,
 				CF3FAEA52B5A9443000E90E1 /* Layer */,
 				CF3FAEA42B5A9430000E90E1 /* Utils */,
@@ -473,6 +478,7 @@
 			isa = PBXGroup;
 			children = (
 				CF3FAE862B5A7903000E90E1 /* ApiClientService.swift */,
+				CF3FAEC52B5AB28C000E90E1 /* ApiClientServiceImpl.swift */,
 			);
 			path = ApiService;
 			sourceTree = "<group>";
@@ -492,6 +498,14 @@
 				CF3FAEC02B5AB151000E90E1 /* MessageDisplayable.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		CF3FAEC22B5AB23C000E90E1 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				CF3FAEC32B5AB245000E90E1 /* String+.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -648,6 +662,7 @@
 				CF3FAE872B5A7903000E90E1 /* ApiClientService.swift in Sources */,
 				CF3FAEAE2B5A974A000E90E1 /* EndPoint.swift in Sources */,
 				CF3FAE732B5A6EBC000E90E1 /* HeadLineCoordinator.swift in Sources */,
+				CF3FAEC42B5AB245000E90E1 /* String+.swift in Sources */,
 				CF3FAE812B5A784E000E90E1 /* SourceDTO.swift in Sources */,
 				CF3FAE932B5A908A000E90E1 /* QueryParams.swift in Sources */,
 				CF3FAE8A2B5A7C08000E90E1 /* ApiError.swift in Sources */,
@@ -658,6 +673,7 @@
 				CF3FAE7D2B5A7739000E90E1 /* ResultArticleDTO.swift in Sources */,
 				CF3FAE952B5A909D000E90E1 /* SearchIn.swift in Sources */,
 				CF3FAE6D2B5A6E40000E90E1 /* Coordinator.swift in Sources */,
+				CF3FAEC62B5AB28C000E90E1 /* ApiClientServiceImpl.swift in Sources */,
 				CF3FAE772B5A731B000E90E1 /* SearchResultViewController.swift in Sources */,
 				CF3FAE9D2B5A91B3000E90E1 /* ArticleRepositoryImpl.swift in Sources */,
 				CF3FAEC12B5AB151000E90E1 /* MessageDisplayable.swift in Sources */,

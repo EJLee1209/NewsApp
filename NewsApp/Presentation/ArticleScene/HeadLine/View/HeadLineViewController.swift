@@ -8,6 +8,10 @@
 import UIKit
 import Combine
 
+protocol HeadLineViewControllerCoordinator: AnyObject {
+    func didSelectArticle(_ article: Article)
+}
+
 final class HeadLineViewController: UITableViewController {
     //MARK: - Properties
     
@@ -18,10 +22,15 @@ final class HeadLineViewController: UITableViewController {
     }()
     
     private let viewModel: HeadLineViewModel
+    private weak var coordinator: HeadLineViewControllerCoordinator?
     private var cancellable = Set<AnyCancellable>()
     
-    init(viewModel: HeadLineViewModel) {
+    init(
+        viewModel: HeadLineViewModel,
+        coordinator: HeadLineViewControllerCoordinator
+    ) {
         self.viewModel = viewModel
+        self.coordinator = coordinator
         super.init(style: .plain)
     }
     
@@ -107,5 +116,17 @@ extension HeadLineViewController {
         return cell
     }
 }
+
+//MARK: - Delegate
+extension HeadLineViewController {
+    override func tableView(
+        _ tableView: UITableView,
+        didSelectRowAt indexPath: IndexPath
+    ) {
+        let article = viewModel.getArticle(row: indexPath.row)
+        coordinator?.didSelectArticle(article)
+    }
+}
+
 
 extension HeadLineViewController: SpinnerDisplayable, MessageDisplayable {}

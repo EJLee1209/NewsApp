@@ -11,6 +11,7 @@ protocol HeadLineViewModel: BaseViewModel {
     var itemArticlesCount: Int { get }
     
     func makeItemViewModel(row: Int) -> ItemHeadLineViewModel
+    func getArticle(row: Int) -> Article
 }
 
 final class HeadLineViewModelImpl: HeadLineViewModel {
@@ -56,5 +57,9 @@ final class HeadLineViewModelImpl: HeadLineViewModel {
     
     func makeItemViewModel(row: Int) -> ItemHeadLineViewModel {
         ItemHeadLineViewModel(article: articles[row])
+    }
+    
+    func getArticle(row: Int) -> Article {
+        articles[row]
     }
 }
