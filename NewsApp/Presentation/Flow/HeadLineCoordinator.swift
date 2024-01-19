@@ -20,7 +20,16 @@ final class HeadLineCoordinator: Coordinator {
     }
     
     func start() {
-        let controller = HeadLineViewController()
+        let apiClient = ApiClientServiceImpl()
+        let articleRepository = ArticleRepositoryImpl(apiClient: apiClient)
+        let loadHeadLineArticlesUseCase = LoadHeadLineArticlesUseCaseImpl(
+            articleRepository: articleRepository,
+            endPoint: EndPoint.headline
+        )
+        let headLineViewModel = HeadLineViewModelImpl(
+            loadHeadLineArticlesUseCase: loadHeadLineArticlesUseCase
+        )
+        let controller = HeadLineViewController(viewModel: headLineViewModel)
         controller.title = "HeadLine"
         navigation.pushViewController(controller, animated: true)
         
