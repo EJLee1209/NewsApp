@@ -9,6 +9,8 @@ import Combine
 
 protocol HeadLineViewModel: BaseViewModel {
     var itemArticlesCount: Int { get }
+    
+    func makeItemViewModel(row: Int) -> ItemHeadLineViewModel
 }
 
 final class HeadLineViewModelImpl: HeadLineViewModel {
@@ -52,4 +54,7 @@ final class HeadLineViewModelImpl: HeadLineViewModel {
         }
     }
     
+    func makeItemViewModel(row: Int) -> ItemHeadLineViewModel {
+        ItemHeadLineViewModel(article: articles[row])
+    }
 }

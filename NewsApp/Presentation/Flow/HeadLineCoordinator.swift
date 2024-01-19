@@ -32,6 +32,7 @@ final class HeadLineCoordinator: Coordinator {
         let controller = HeadLineViewController(viewModel: headLineViewModel)
         controller.title = "HeadLine"
         navigation.pushViewController(controller, animated: true)
+        navigation.navigationBar.prefersLargeTitles = true
         
         window.rootViewController = navigation
         window.makeKeyAndVisible()

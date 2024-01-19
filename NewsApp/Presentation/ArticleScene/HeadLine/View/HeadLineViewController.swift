@@ -11,6 +11,12 @@ import Combine
 final class HeadLineViewController: UITableViewController {
     //MARK: - Properties
     
+    private let testView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemBlue
+        return view
+    }()
+    
     private let viewModel: HeadLineViewModel
     private var cancellable = Set<AnyCancellable>()
     
@@ -37,12 +43,18 @@ final class HeadLineViewController: UITableViewController {
     private func configUI() {
         view.backgroundColor = .systemBackground
         
+        tableView.register(
+            ItemHeadLineTableViewCell.self,
+            forCellReuseIdentifier: ItemHeadLineTableViewCell.identifier
+        )
+        tableView.separatorStyle = .none
+        
     }
     
     private func configSearchController() {
         let searchResultController = SearchResultViewController()
         let searchController = UISearchController(searchResultsController: searchResultController)
-        searchController.searchBar.placeholder = "Search News"
+        searchController.searchBar.placeholder = "Search Articles"
         searchController.searchResultsUpdater = searchResultController
         self.navigationItem.searchController = searchController
     }
@@ -56,13 +68,15 @@ final class HeadLineViewController: UITableViewController {
     }
     
     private func updateUI(state: ViewState) {
+        hideSpinner()
+        
         switch state {
         case .loading:
-            print("DEBUG: 로딩 중..")
+            showSpinner()
         case .success:
-            print("DEBUG: 아티클 수 \(viewModel.itemArticlesCount)")
+            tableView.reloadData()
         case .fail(let errorMsg):
-            print("DEBUG: \(errorMsg)")
+            presentAlert(title: "Error", message: errorMsg)
         }
     }
     
@@ -71,3 +85,27 @@ final class HeadLineViewController: UITableViewController {
     
 }
 
+//MARK: - DataSource
+extension HeadLineViewController {
+    override func tableView(
+        _ tableView: UITableView,
+        numberOfRowsInSection section: Int
+    ) -> Int {
+        viewModel.itemArticlesCount
+    }
+    
+    override func tableView(
+        _ tableView: UITableView,
+        cellForRowAt indexPath: IndexPath
+    ) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: ItemHeadLineTableViewCell.identifier,
+            for: indexPath
+        ) as! ItemHeadLineTableViewCell
+        let itemViewModel = viewModel.makeItemViewModel(row: indexPath.row)
+        cell.configData(viewModel: itemViewModel)
+        return cell
+    }
+}
+
+extension HeadLineViewController: SpinnerDisplayable, MessageDisplayable {}
