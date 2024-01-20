@@ -7,17 +7,24 @@
 
 import UIKit
 
+protocol CategoryViewControllerCoordinator: AnyObject {
+    func didSelectCategory(category: String)
+}
+
 final class CategoryViewController: UICollectionViewController {
     //MARK: - Properties
     
     private let viewModel: CategoryViewModel
+    private weak var coodinator: CategoryViewControllerCoordinator?
     
     //MARK: - Life Cycle
     init(
         viewModel: CategoryViewModel,
-        layout: UICollectionViewLayout
+        layout: UICollectionViewLayout,
+        coodinator: CategoryViewControllerCoordinator
     ) {
         self.viewModel = viewModel
+        self.coodinator = coodinator
         super.init(collectionViewLayout: layout)
     }
     
@@ -74,5 +81,16 @@ extension CategoryViewController {
         let itemViewModel = viewModel.makeItemCategoryViewModel(row: indexPath.row)
         cell.configData(viewModel: itemViewModel)
         return cell
+    }
+}
+
+//MARK: - Delegate
+extension CategoryViewController {
+    override func collectionView(
+        _ collectionView: UICollectionView,
+        didSelectItemAt indexPath: IndexPath
+    ) {
+        let category = viewModel.getSelectedCategory(row: indexPath.row)
+        coodinator?.didSelectCategory(category: category)
     }
 }

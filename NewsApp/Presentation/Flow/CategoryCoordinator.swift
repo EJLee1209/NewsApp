@@ -12,6 +12,8 @@ final class CategoryCoordinator: Coordinator {
     var appDIContainer: AppDIContainer
     private let window: UIWindow
     
+    private var headlineCoodinator: Coordinator?
+    
     init(
         navigation: UINavigationController,
         appDIContainer: AppDIContainer,
@@ -25,7 +27,8 @@ final class CategoryCoordinator: Coordinator {
     func start() {
         let categoryViewController = CategoryViewController(
             viewModel: appDIContainer.makeCategoryViewModel(),
-            layout: makeCollectionViewLayout()
+            layout: makeCollectionViewLayout(),
+            coodinator: self
         )
         categoryViewController.title = "News App"
         navigation.pushViewController(categoryViewController, animated: true)
@@ -66,4 +69,18 @@ final class CategoryCoordinator: Coordinator {
     
 }
 
-
+//MARK: - CategoryViewControllerCoordinator
+extension CategoryCoordinator: CategoryViewControllerCoordinator {
+    func didSelectCategory(category: String) {
+        headlineCoodinator = makeHeadlineCoordinator(category: category)
+        headlineCoodinator?.start()
+    }
+    
+    private func makeHeadlineCoordinator(category: String) -> Coordinator {
+        HeadLineCoordinator(
+            navigation: navigation,
+            appDIContainer: appDIContainer,
+            category: category
+        )
+    }
+}

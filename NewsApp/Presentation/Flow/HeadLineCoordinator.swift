@@ -13,30 +13,28 @@ final class HeadLineCoordinator: Coordinator {
     
     var navigation: UINavigationController
     var appDIContainer: AppDIContainer
-    private let window: UIWindow
     
+    private let category: String
     private var articleDetailCoordinator: Coordinator?
     
     init(
         navigation: UINavigationController,
         appDIContainer: AppDIContainer,
-        window: UIWindow
+        category: String
     ) {
         self.navigation = navigation
         self.appDIContainer = appDIContainer
-        self.window = window
+        self.category = category
     }
     
     func start() {
         let controller = makeHeadLineViewController()
         controller.title = "Top Headline"
         navigation.pushViewController(controller, animated: true)
-        window.rootViewController = navigation
-        window.makeKeyAndVisible()
     }
     
     private func makeHeadLineViewController() -> UIViewController {
-        let viewModel = appDIContainer.makeHeadLineViewModel()
+        let viewModel = appDIContainer.makeHeadLineViewModel(category: category)
         return HeadLineViewController(
             viewModel: viewModel,
             coordinator: self

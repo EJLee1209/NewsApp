@@ -22,12 +22,16 @@ final class HeadLineViewModelImpl: HeadLineViewModel {
     var state: PassthroughSubject<ViewState, Never> = .init()
     
     private var loadHeadLineArticlesUseCase: LoadHeadLineArticlesUseCase
+    private let category: String
     private var articles: [Article] = []
     
+    
     init(
-        loadHeadLineArticlesUseCase: LoadHeadLineArticlesUseCase
+        loadHeadLineArticlesUseCase: LoadHeadLineArticlesUseCase,
+        category: String
     ) {
         self.loadHeadLineArticlesUseCase = loadHeadLineArticlesUseCase
+        self.category = category
     }
     
     func viewDidLoad() {
@@ -35,7 +39,7 @@ final class HeadLineViewModelImpl: HeadLineViewModel {
         
         Task {
             let query = HeadLineQuery(
-                category: nil,
+                category: category,
                 country: HeadLineCountry.kr.rawValue,
                 apiKey: EndPoint.apiKey
             )

@@ -17,4 +17,7 @@ struct CategoryViewModel {
         ItemCategoryViewModel(category: categories[row])
     }
     
+    func getSelectedCategory(row: Int) -> String {
+        categories[row].rawValue
+    }
 }

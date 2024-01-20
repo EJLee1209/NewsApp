@@ -5,9 +5,10 @@
 //  Created by 이은재 on 1/20/24.
 //
 
+/// 앱 의존성 관리를 위한 DIContainer
 protocol AppDIContainer {
     func makeCategoryViewModel() -> CategoryViewModel
-    func makeHeadLineViewModel() -> HeadLineViewModel
+    func makeHeadLineViewModel(category: String) -> HeadLineViewModel
     func makeArticleViewModel(article: Article) -> ArticleDetailViewModel
 }
 
@@ -26,15 +27,20 @@ struct AppDIContainerImpl: AppDIContainer {
         CategoryViewModel()
     }
     
-    func makeHeadLineViewModel() -> HeadLineViewModel {
-        let useCase = makeLoadHeadLineArticleUseCase()
-        return HeadLineViewModelImpl(loadHeadLineArticlesUseCase: useCase)
+    func makeHeadLineViewModel(category: String) -> HeadLineViewModel {
+        HeadLineViewModelImpl(
+            loadHeadLineArticlesUseCase: makeLoadHeadLineArticleUseCase(),
+            category: category
+        )
+    }
+    
+    func makeArticleViewModel(article: Article) -> ArticleDetailViewModel {
+        ArticleDetailViewModel(article: article)
     }
     
     private func makeLoadHeadLineArticleUseCase() -> LoadHeadLineArticlesUseCase {
-        let repository = makeArticleRepository()
-        return LoadHeadLineArticlesUseCaseImpl(
-            articleRepository: repository,
+        LoadHeadLineArticlesUseCaseImpl(
+            articleRepository: makeArticleRepository(),
             endPoint: EndPoint.headline
         )
     }
@@ -43,8 +49,4 @@ struct AppDIContainerImpl: AppDIContainer {
         ArticleRepositoryImpl(apiClient: dependencies.apiClient)
     }
     
-    
-    func makeArticleViewModel(article: Article) -> ArticleDetailViewModel {
-        ArticleDetailViewModel(article: article)
-    }
 }
