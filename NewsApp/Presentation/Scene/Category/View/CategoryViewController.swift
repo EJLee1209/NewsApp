@@ -36,7 +36,7 @@ final class CategoryViewController: UICollectionViewController {
         super.viewDidLoad()
     
         configUI()
-        configSearchController()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -55,14 +55,6 @@ final class CategoryViewController: UICollectionViewController {
             forCellWithReuseIdentifier: ItemCategoryCollectionViewCell.identifier
         )
         
-    }
-    
-    private func configSearchController() {
-        let searchResultController = SearchResultViewController()
-        let searchController = UISearchController(searchResultsController: searchResultController)
-        searchController.searchBar.placeholder = "Search Articles"
-        searchController.searchResultsUpdater = searchResultController
-        self.navigationItem.searchController = searchController
     }
     
     //MARK: - Actions

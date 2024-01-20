@@ -10,6 +10,7 @@ protocol AppDIContainer {
     func makeCategoryViewModel() -> CategoryViewModel
     func makeHeadLineViewModel(category: String) -> HeadLineViewModel
     func makeArticleViewModel(article: Article) -> ArticleDetailViewModel
+    func makeSearchResultViewModel() -> SearchResultViewModel
 }
 
 struct AppDIContainerImpl: AppDIContainer {
@@ -36,6 +37,19 @@ struct AppDIContainerImpl: AppDIContainer {
     
     func makeArticleViewModel(article: Article) -> ArticleDetailViewModel {
         ArticleDetailViewModel(article: article)
+    }
+    
+    func makeSearchResultViewModel() -> SearchResultViewModel {
+        SearchResultViewModelImpl(
+            loadSearchResultArticlesUseCase: makeLoadSearchResultArticlesUseCase()
+        )
+    }
+    
+    private func makeLoadSearchResultArticlesUseCase() -> LoadSearchResultArticlesUseCase {
+        LoadSearchResultArticlesUseCaseImpl(
+            articleRepository: makeArticleRepository(),
+            endPoint: EndPoint.everything
+        )
     }
     
     private func makeLoadHeadLineArticleUseCase() -> LoadHeadLineArticlesUseCase {

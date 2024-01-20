@@ -5,11 +5,11 @@
 //  Created by 이은재 on 1/19/24.
 //
 
-struct ArticleQuery: QueryParams {
+struct SearchQuery: QueryParams {
     let q: String
     let searchIn: String?
     let sortBy: String?
-    let apiKey: String
+    let apiKey: String = EndPoint.apiKey
 }
 
 

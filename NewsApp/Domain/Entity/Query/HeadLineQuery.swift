@@ -8,5 +8,5 @@
 struct HeadLineQuery: QueryParams {
     let category: String?
     let country: String?
-    let apiKey: String
+    let apiKey: String = EndPoint.apiKey
 }

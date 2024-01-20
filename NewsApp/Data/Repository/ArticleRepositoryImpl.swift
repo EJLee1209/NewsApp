@@ -9,7 +9,7 @@ struct ArticleRepositoryImpl: ArticleRepository {
     
     private(set) var apiClient: ApiClientService
     
-    func fetchHeadLineArticles(
+    func fetchArticles(
         endPoint: String,
         query: [String : String]
     ) async throws -> [Article] {

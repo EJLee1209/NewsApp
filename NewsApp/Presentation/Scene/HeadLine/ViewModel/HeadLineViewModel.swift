@@ -43,8 +43,7 @@ final class HeadLineViewModelImpl: HeadLineViewModel {
         Task {
             let query = HeadLineQuery(
                 category: category,
-                country: country.rawValue,
-                apiKey: EndPoint.apiKey
+                country: country.rawValue
             )
             updateHeadLineArticles(
                 result: await loadHeadLineArticlesUseCase.execute(query: query)

@@ -13,6 +13,7 @@ final class CategoryCoordinator: Coordinator {
     private let window: UIWindow
     
     private var headlineCoodinator: Coordinator?
+    private var articleDetailCoordinator: Coordinator?
     
     init(
         navigation: UINavigationController,
@@ -33,10 +34,12 @@ final class CategoryCoordinator: Coordinator {
         categoryViewController.title = "News App"
         navigation.pushViewController(categoryViewController, animated: true)
         
+        configSearchController(categoryViewController)
+        
         window.rootViewController = navigation
         window.makeKeyAndVisible()
     }
-    
+
     private func makeCollectionViewLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = ViewValue.normalPadding
@@ -66,7 +69,16 @@ final class CategoryCoordinator: Coordinator {
         return CGSize(width: cellWidth, height: cellWidth)
     }
     
-    
+    private func configSearchController(_ viewController: UIViewController) {
+        let searchResultController = SearchResultViewController(
+            viewModel: appDIContainer.makeSearchResultViewModel(), 
+            coordinator: self
+        )
+        let searchController = UISearchController(searchResultsController: searchResultController)
+        searchController.searchBar.placeholder = "Search Articles"
+        searchController.searchResultsUpdater = searchResultController
+        viewController.navigationItem.searchController = searchController
+    }
 }
 
 //MARK: - CategoryViewControllerCoordinator
@@ -81,6 +93,21 @@ extension CategoryCoordinator: CategoryViewControllerCoordinator {
             navigation: navigation,
             appDIContainer: appDIContainer,
             category: category
+        )
+    }
+}
+
+extension CategoryCoordinator: SearchResultViewControllerCoordinator {
+    func didSelectSearchResult(article: Article) {
+        articleDetailCoordinator = makeArticleDetailCoordinator(article: article)
+        articleDetailCoordinator?.start()
+    }
+    
+    private func makeArticleDetailCoordinator(article: Article) -> Coordinator {
+        ArticleDetailCoordinator(
+            navigation: navigation,
+            appDIContainer: appDIContainer,
+            article: article
         )
     }
 }

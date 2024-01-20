@@ -17,7 +17,7 @@ struct LoadHeadLineArticlesUseCaseImpl: LoadHeadLineArticlesUseCase {
     
     func execute(query: HeadLineQuery) async -> Result<[Article], Error> {
         do {
-            let articles = try await articleRepository.fetchHeadLineArticles(
+            let articles = try await articleRepository.fetchArticles(
                 endPoint: endPoint,
                 query: query.toDict()
             )
