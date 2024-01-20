@@ -13,6 +13,7 @@ struct ArticleRepositoryImpl: ArticleRepository {
         endPoint: String,
         query: [String : String]
     ) async throws -> [Article] {
+        
         try await apiClient.request(
             endPoint: endPoint,
             query: query,

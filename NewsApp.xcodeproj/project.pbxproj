@@ -51,6 +51,7 @@
 		CF3FAEC12B5AB151000E90E1 /* MessageDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3FAEC02B5AB151000E90E1 /* MessageDisplayable.swift */; };
 		CF3FAEC42B5AB245000E90E1 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3FAEC32B5AB245000E90E1 /* String+.swift */; };
 		CF3FAEC62B5AB28C000E90E1 /* ApiClientServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3FAEC52B5AB28C000E90E1 /* ApiClientServiceImpl.swift */; };
+		CF7B38B02B5B806200EFE6BD /* AppDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7B38AF2B5B806200EFE6BD /* AppDIContainer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +116,7 @@
 		CF3FAEC02B5AB151000E90E1 /* MessageDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDisplayable.swift; sourceTree = "<group>"; };
 		CF3FAEC32B5AB245000E90E1 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		CF3FAEC52B5AB28C000E90E1 /* ApiClientServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClientServiceImpl.swift; sourceTree = "<group>"; };
+		CF7B38AF2B5B806200EFE6BD /* AppDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDIContainer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,6 +213,7 @@
 		CF3FAE572B5A6B26000E90E1 /* DIContainer */ = {
 			isa = PBXGroup;
 			children = (
+				CF7B38AF2B5B806200EFE6BD /* AppDIContainer.swift */,
 			);
 			path = DIContainer;
 			sourceTree = "<group>";
@@ -656,6 +659,7 @@
 				CF3FAE972B5A90A6000E90E1 /* ArticleSortType.swift in Sources */,
 				CF3FAEA32B5A9423000E90E1 /* ViewState.swift in Sources */,
 				CF3FAE7F2B5A7844000E90E1 /* ArticleDTO.swift in Sources */,
+				CF7B38B02B5B806200EFE6BD /* AppDIContainer.swift in Sources */,
 				CF3FAE7B2B5A7623000E90E1 /* Article.swift in Sources */,
 				CF3FAE292B5A6985000E90E1 /* SceneDelegate.swift in Sources */,
 				CF3FAE9B2B5A90CF000E90E1 /* HeadLineCountry.swift in Sources */,

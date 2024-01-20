@@ -7,32 +7,26 @@
 
 import UIKit
 
+
+
 final class HeadLineCoordinator: Coordinator {
+    
     var navigation: UINavigationController
+    var appDIContainer: AppDIContainer
     private let window: UIWindow
     
     init(
         navigation: UINavigationController,
+        appDIContainer: AppDIContainer,
         window: UIWindow
     ) {
         self.navigation = navigation
+        self.appDIContainer = appDIContainer
         self.window = window
     }
     
     func start() {
-        let apiClient = ApiClientServiceImpl()
-        let articleRepository = ArticleRepositoryImpl(apiClient: apiClient)
-        let loadHeadLineArticlesUseCase = LoadHeadLineArticlesUseCaseImpl(
-            articleRepository: articleRepository,
-            endPoint: EndPoint.headline
-        )
-        let headLineViewModel = HeadLineViewModelImpl(
-            loadHeadLineArticlesUseCase: loadHeadLineArticlesUseCase
-        )
-        let controller = HeadLineViewController(
-            viewModel: headLineViewModel,
-            coordinator: self
-        )
+        let controller = makeHeadLineViewController()
         controller.title = "HeadLine"
         navigation.pushViewController(controller, animated: true)
         navigation.navigationBar.prefersLargeTitles = true
@@ -40,6 +34,16 @@ final class HeadLineCoordinator: Coordinator {
         window.rootViewController = navigation
         window.makeKeyAndVisible()
     }
+    
+    private func makeHeadLineViewController() -> UIViewController {
+        let viewModel = appDIContainer.makeHeadLineViewModel()
+        return HeadLineViewController(
+            viewModel: viewModel,
+            coordinator: self
+        )
+    }
+    
+    
 }
 
 extension HeadLineCoordinator: HeadLineViewControllerCoordinator {

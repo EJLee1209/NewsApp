@@ -15,7 +15,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
         
-        let headLineCoodinator = HeadLineCoordinator(navigation: UINavigationController(), window: window)
+        let apiClientService = ApiClientServiceImpl()
+        let appDIContainer = AppDIContainerImpl(dependencies: .init(apiClient: apiClientService))
+        let headLineCoodinator = HeadLineCoordinator(
+            navigation: UINavigationController(),
+            appDIContainer: appDIContainer,
+            window: window
+        )
         headLineCoodinator.start()
         self.headLineCoodinator = headLineCoodinator
     }
