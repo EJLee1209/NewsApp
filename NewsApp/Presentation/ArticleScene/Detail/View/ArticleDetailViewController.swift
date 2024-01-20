@@ -9,6 +9,26 @@ import UIKit
 
 final class ArticleDetailViewController: UIViewController {
     //MARK: - Properties
+    private let articleImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        return imageView
+    }()
+    
+    private lazy var titleLabel: UILabel = makeLabel(font: .systemFont(ofSize: 25, weight: .bold))
+    private lazy var authorLabel: UILabel = makeLabel(font: .systemFont(ofSize: 14))
+    private lazy var dateLabel: UILabel = makeLabel(font: .systemFont(ofSize: 12))
+    private lazy var descriptionLabel: UILabel = makeLabel(font: .systemFont(ofSize: 16))
+    
+    private lazy var containerStackView: UIStackView = {
+        let sv = UIStackView(arrangedSubviews: [
+            titleLabel, authorLabel, dateLabel, articleImageView, descriptionLabel
+        ])
+        sv.axis = .vertical
+        sv.spacing = 8
+        return sv
+    }()
     
     private let viewModel: ArticleDetailViewModel
     
@@ -27,6 +47,7 @@ final class ArticleDetailViewController: UIViewController {
         super.viewDidLoad()
         
         configUI()
+        configData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,6 +59,31 @@ final class ArticleDetailViewController: UIViewController {
     //MARK: - Helpers
     private func configUI() {
         view.backgroundColor = .systemBackground
+        
+        view.addSubview(containerStackView)
+        containerStackView.snp.makeConstraints { make in
+            make.horizontalEdges.equalToSuperview().inset(12)
+            make.top.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        articleImageView.snp.makeConstraints { make in
+            make.height.equalTo(articleImageView.snp.width)
+        }
+    }
+    
+    private func configData() {
+        articleImageView.sd_setImage(with: viewModel.imageUrl)
+        titleLabel.text = viewModel.title
+        dateLabel.text = viewModel.publishedAt
+        authorLabel.text = viewModel.author
+        descriptionLabel.text = viewModel.description
+    }
+    
+    private func makeLabel(font: UIFont) -> UILabel {
+        let label = UILabel()
+        label.font = font
+        label.numberOfLines = 0
+        return label
     }
     
     //MARK: - Actions

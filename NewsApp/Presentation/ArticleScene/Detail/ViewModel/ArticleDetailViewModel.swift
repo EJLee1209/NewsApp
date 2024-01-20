@@ -21,12 +21,12 @@ struct ArticleDetailViewModel {
         article.description
     }
     
-    var author: String? {
-        article.author
+    var author: String {
+        "출처: \(article.author ?? "Unknown")"
     }
     
     var publishedAt: String? {
-        article.publishedAt?.convertToPrettyDateString()
+        article.publishedAt
     }
     
     
