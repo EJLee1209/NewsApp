@@ -12,14 +12,21 @@ protocol HeadLineViewControllerCoordinator: AnyObject {
     func didSelectArticle(_ article: Article)
 }
 
-final class HeadLineViewController: UITableViewController {
+final class HeadLineViewController: UIViewController {
     //MARK: - Properties
     
-    private let testView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .systemBlue
-        return view
+    private lazy var tableView : UITableView = {
+        let tv = UITableView(frame: .zero, style: .plain)
+        tv.dataSource = self
+        tv.delegate = self
+        tv.separatorStyle = .none
+        tv.register(
+            ItemHeadLineTableViewCell.self,
+            forCellReuseIdentifier: ItemHeadLineTableViewCell.identifier
+        )
+        return tv
     }()
+    
     
     private let viewModel: HeadLineViewModel
     private weak var coordinator: HeadLineViewControllerCoordinator?
@@ -31,7 +38,8 @@ final class HeadLineViewController: UITableViewController {
     ) {
         self.viewModel = viewModel
         self.coordinator = coordinator
-        super.init(style: .plain)
+    
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -58,12 +66,10 @@ final class HeadLineViewController: UITableViewController {
     private func configUI() {
         view.backgroundColor = .systemBackground
         
-        tableView.register(
-            ItemHeadLineTableViewCell.self,
-            forCellReuseIdentifier: ItemHeadLineTableViewCell.identifier
-        )
-        tableView.separatorStyle = .none
-        
+        view.addSubview(tableView)
+        tableView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
     
     private func configSearchController() {
@@ -100,19 +106,13 @@ final class HeadLineViewController: UITableViewController {
     
 }
 
-//MARK: - DataSource
-extension HeadLineViewController {
-    override func tableView(
-        _ tableView: UITableView,
-        numberOfRowsInSection section: Int
-    ) -> Int {
+//MARK: - UITableViewDataSource
+extension HeadLineViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.itemArticlesCount
     }
     
-    override func tableView(
-        _ tableView: UITableView,
-        cellForRowAt indexPath: IndexPath
-    ) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(
             withIdentifier: ItemHeadLineTableViewCell.identifier,
             for: indexPath
@@ -123,9 +123,9 @@ extension HeadLineViewController {
     }
 }
 
-//MARK: - Delegate
-extension HeadLineViewController {
-    override func tableView(
+//MARK: - UITableViewDelegate
+extension HeadLineViewController: UITableViewDelegate {
+    func tableView(
         _ tableView: UITableView,
         didSelectRowAt indexPath: IndexPath
     ) {
