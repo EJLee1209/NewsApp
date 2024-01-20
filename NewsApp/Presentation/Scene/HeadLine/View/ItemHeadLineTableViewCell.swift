@@ -97,7 +97,12 @@ final class ItemHeadLineTableViewCell: UITableViewCell {
     }
     
     func configData(viewModel: ItemHeadLineViewModel) {
-        articleImageView.sd_setImage(with: viewModel.imageURL)
+        if let imageUrl = viewModel.imageURL {
+            articleImageView.sd_setImage(with: URL(string: imageUrl))
+        } else {
+            articleImageView.image = UIImage(named: "defaultImage")
+        }
+        
         titleLabel.text = viewModel.title
         dateLabel.text = viewModel.publishedAt
     }

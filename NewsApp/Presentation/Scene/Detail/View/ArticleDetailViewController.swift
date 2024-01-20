@@ -72,7 +72,12 @@ final class ArticleDetailViewController: UIViewController {
     }
     
     private func configData() {
-        articleImageView.sd_setImage(with: viewModel.imageUrl)
+        if let imageUrl = viewModel.imageUrl {
+            articleImageView.sd_setImage(with: URL(string: imageUrl))
+        } else {
+            articleImageView.image = UIImage(named: "defaultImage")
+        }
+        
         titleLabel.text = viewModel.title
         dateLabel.text = viewModel.publishedAt
         authorLabel.text = viewModel.author

@@ -12,6 +12,7 @@ protocol HeadLineViewModel: BaseViewModel {
     
     func makeItemViewModel(row: Int) -> ItemHeadLineViewModel
     func getArticle(row: Int) -> Article
+    func changeCountry(country: HeadLineCountry)
 }
 
 final class HeadLineViewModelImpl: HeadLineViewModel {
@@ -24,14 +25,16 @@ final class HeadLineViewModelImpl: HeadLineViewModel {
     private var loadHeadLineArticlesUseCase: LoadHeadLineArticlesUseCase
     private let category: String
     private var articles: [Article] = []
-    
+    private var country: HeadLineCountry
     
     init(
         loadHeadLineArticlesUseCase: LoadHeadLineArticlesUseCase,
-        category: String
+        category: String,
+        country: HeadLineCountry = .kr
     ) {
         self.loadHeadLineArticlesUseCase = loadHeadLineArticlesUseCase
         self.category = category
+        self.country = country
     }
     
     func viewDidLoad() {
@@ -40,7 +43,7 @@ final class HeadLineViewModelImpl: HeadLineViewModel {
         Task {
             let query = HeadLineQuery(
                 category: category,
-                country: HeadLineCountry.kr.rawValue,
+                country: country.rawValue,
                 apiKey: EndPoint.apiKey
             )
             updateHeadLineArticles(
@@ -65,5 +68,10 @@ final class HeadLineViewModelImpl: HeadLineViewModel {
     
     func getArticle(row: Int) -> Article {
         articles[row]
+    }
+    
+    func changeCountry(country: HeadLineCountry) {
+        self.country = country
+        viewDidLoad()
     }
 }

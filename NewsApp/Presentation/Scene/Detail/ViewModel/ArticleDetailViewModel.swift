@@ -4,13 +4,12 @@
 //
 //  Created by 이은재 on 1/20/24.
 //
-import Foundation
 
 struct ArticleDetailViewModel {
     private let article: Article
     
-    var imageUrl: URL? {
-        URL(string: article.urlToImage ?? "")
+    var imageUrl: String? {
+        article.urlToImage
     }
     
     var title: String? {

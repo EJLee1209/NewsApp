@@ -12,22 +12,9 @@ protocol HeadLineViewControllerCoordinator: AnyObject {
     func didSelectArticle(_ article: Article)
 }
 
-final class HeadLineViewController: UIViewController {
+final class HeadLineViewController: UITableViewController {
     //MARK: - Properties
-    
-    private lazy var tableView : UITableView = {
-        let tv = UITableView(frame: .zero, style: .plain)
-        tv.dataSource = self
-        tv.delegate = self
-        tv.separatorStyle = .none
-        tv.register(
-            ItemHeadLineTableViewCell.self,
-            forCellReuseIdentifier: ItemHeadLineTableViewCell.identifier
-        )
-        return tv
-    }()
-    
-    
+
     private let viewModel: HeadLineViewModel
     private weak var coordinator: HeadLineViewControllerCoordinator?
     private var cancellable = Set<AnyCancellable>()
@@ -51,7 +38,6 @@ final class HeadLineViewController: UIViewController {
         super.viewDidLoad()
         
         configUI()
-        configSearchController()
         configViewState()
         viewModel.viewDidLoad()
     }
@@ -66,18 +52,32 @@ final class HeadLineViewController: UIViewController {
     private func configUI() {
         view.backgroundColor = .systemBackground
         
-        view.addSubview(tableView)
-        tableView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
+        tableView.separatorStyle = .none
+        tableView.register(
+            ItemHeadLineTableViewCell.self,
+            forCellReuseIdentifier: ItemHeadLineTableViewCell.identifier
+        )
+        
+        configRightBarButton()
     }
     
-    private func configSearchController() {
-        let searchResultController = SearchResultViewController()
-        let searchController = UISearchController(searchResultsController: searchResultController)
-        searchController.searchBar.placeholder = "Search Articles"
-        searchController.searchResultsUpdater = searchResultController
-        self.navigationItem.searchController = searchController
+    private func configRightBarButton() {
+        let menuItems = HeadLineCountry.allCases.map { country in
+            UIAction(
+                title: country.description,
+                handler: { [weak self] action in
+                    self?.viewModel.changeCountry(country: country)
+                }
+            )
+        }
+        
+        let menu = UIMenu(title: "Select Country", options: .displayInline, children: menuItems)
+        
+        let rightBarButton = UIBarButtonItem(
+            image: UIImage(systemName: "ellipsis.circle"),
+            menu: menu
+        )
+        navigationItem.setRightBarButton(rightBarButton, animated: true)
     }
     
     private func configViewState() {
@@ -101,18 +101,15 @@ final class HeadLineViewController: UIViewController {
         }
     }
     
-    
-    //MARK: - Actions
-    
 }
 
 //MARK: - UITableViewDataSource
-extension HeadLineViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension HeadLineViewController {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.itemArticlesCount
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(
             withIdentifier: ItemHeadLineTableViewCell.identifier,
             for: indexPath
@@ -124,8 +121,8 @@ extension HeadLineViewController: UITableViewDataSource {
 }
 
 //MARK: - UITableViewDelegate
-extension HeadLineViewController: UITableViewDelegate {
-    func tableView(
+extension HeadLineViewController {
+    override func tableView(
         _ tableView: UITableView,
         didSelectRowAt indexPath: IndexPath
     ) {

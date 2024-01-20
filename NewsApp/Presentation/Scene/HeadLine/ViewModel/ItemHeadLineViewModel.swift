@@ -5,7 +5,6 @@
 //  Created by 이은재 on 1/19/24.
 //
 
-import Foundation
 
 struct ItemHeadLineViewModel {
     private(set) var article: Article
@@ -18,7 +17,7 @@ struct ItemHeadLineViewModel {
         article.publishedAt
     }
     
-    var imageURL: URL? {
-        URL(string: article.urlToImage ?? "")
+    var imageURL: String? {
+        article.urlToImage
     }
 }
