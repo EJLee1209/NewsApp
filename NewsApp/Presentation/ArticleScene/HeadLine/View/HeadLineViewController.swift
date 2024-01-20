@@ -48,6 +48,12 @@ final class HeadLineViewController: UITableViewController {
         viewModel.viewDidLoad()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
     //MARK: - Helpers
     private func configUI() {
         view.backgroundColor = .systemBackground

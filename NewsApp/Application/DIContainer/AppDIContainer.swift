@@ -7,6 +7,7 @@
 
 protocol AppDIContainer {
     func makeHeadLineViewModel() -> HeadLineViewModel
+    func makeArticleViewModel(article: Article) -> ArticleDetailViewModel
 }
 
 struct AppDIContainerImpl: AppDIContainer {
@@ -35,5 +36,10 @@ struct AppDIContainerImpl: AppDIContainer {
     
     private func makeArticleRepository() -> ArticleRepository {
         ArticleRepositoryImpl(apiClient: dependencies.apiClient)
+    }
+    
+    
+    func makeArticleViewModel(article: Article) -> ArticleDetailViewModel {
+        ArticleDetailViewModel(article: article)
     }
 }

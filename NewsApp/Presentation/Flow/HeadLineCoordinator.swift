@@ -15,6 +15,8 @@ final class HeadLineCoordinator: Coordinator {
     var appDIContainer: AppDIContainer
     private let window: UIWindow
     
+    private var articleDetailCoordinator: Coordinator?
+    
     init(
         navigation: UINavigationController,
         appDIContainer: AppDIContainer,
@@ -27,10 +29,8 @@ final class HeadLineCoordinator: Coordinator {
     
     func start() {
         let controller = makeHeadLineViewController()
-        controller.title = "HeadLine"
+        controller.title = "Top Headline"
         navigation.pushViewController(controller, animated: true)
-        navigation.navigationBar.prefersLargeTitles = true
-        
         window.rootViewController = navigation
         window.makeKeyAndVisible()
     }
@@ -42,12 +42,19 @@ final class HeadLineCoordinator: Coordinator {
             coordinator: self
         )
     }
-    
-    
 }
 
 extension HeadLineCoordinator: HeadLineViewControllerCoordinator {
     func didSelectArticle(_ article: Article) {
-        print("DEBUG: 선택된 아티클 \(article)")
+        articleDetailCoordinator = makeArticleDetailCoordinator(article: article)
+        articleDetailCoordinator?.start()
+    }
+    
+    private func makeArticleDetailCoordinator(article: Article) -> Coordinator {
+        ArticleDetailCoordinator(
+            navigation: navigation,
+            appDIContainer: appDIContainer,
+            article: article
+        )
     }
 }
