@@ -6,3 +6,21 @@
 //
 
 import Foundation
+
+struct ItemCategoryViewModel {
+    
+    private let category: HeadLineCategory
+    
+    var title: String {
+        category.rawValue
+    }
+    
+    var imageName: String {
+        category.rawValue
+    }
+    
+    init(category: HeadLineCategory) {
+        self.category = category
+    }
+    
+}

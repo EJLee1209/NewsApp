@@ -9,7 +9,7 @@ import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
-    private var headLineCoodinator: Coordinator?
+    private var categoryCoordinator: Coordinator?
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
@@ -17,13 +17,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let apiClientService = ApiClientServiceImpl()
         let appDIContainer = AppDIContainerImpl(dependencies: .init(apiClient: apiClientService))
-        let headLineCoodinator = HeadLineCoordinator(
+        categoryCoordinator = CategoryCoordinator(
             navigation: UINavigationController(),
             appDIContainer: appDIContainer,
             window: window
         )
-        headLineCoodinator.start()
-        self.headLineCoodinator = headLineCoodinator
+        categoryCoordinator?.start()
+//        
+//        let headLineCoodinator = HeadLineCoordinator(
+//            navigation: UINavigationController(),
+//            appDIContainer: appDIContainer,
+//            window: window
+//        )
+//        headLineCoodinator.start()
+//        self.headLineCoodinator = headLineCoodinator
     }
 }
 

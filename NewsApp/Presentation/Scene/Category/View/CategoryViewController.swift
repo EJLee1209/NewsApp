@@ -10,7 +10,21 @@ import UIKit
 final class CategoryViewController: UICollectionViewController {
     //MARK: - Properties
     
+    private let viewModel: CategoryViewModel
+    
     //MARK: - Life Cycle
+    init(
+        viewModel: CategoryViewModel,
+        layout: UICollectionViewLayout
+    ) {
+        self.viewModel = viewModel
+        super.init(collectionViewLayout: layout)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     
@@ -28,7 +42,10 @@ final class CategoryViewController: UICollectionViewController {
     private func configUI() {
         view.backgroundColor = .systemBackground
         
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView.register(
+            ItemCategoryCollectionViewCell.self,
+            forCellWithReuseIdentifier: ItemCategoryCollectionViewCell.identifier
+        )
         
     }
     
@@ -43,7 +60,7 @@ extension CategoryViewController {
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        return 10
+        viewModel.itemCategoriesCount
     }
     
     override func collectionView(
@@ -51,12 +68,11 @@ extension CategoryViewController {
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: "cell",
+            withReuseIdentifier: ItemCategoryCollectionViewCell.identifier,
             for: indexPath
-        )
-        cell.backgroundColor = .systemBlue
-        cell.layer.cornerRadius = 12
-        cell.clipsToBounds = true
+        ) as! ItemCategoryCollectionViewCell
+        let itemViewModel = viewModel.makeItemCategoryViewModel(row: indexPath.row)
+        cell.configData(viewModel: itemViewModel)
         return cell
     }
 }

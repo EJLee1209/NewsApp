@@ -6,6 +6,7 @@
 //
 
 protocol AppDIContainer {
+    func makeCategoryViewModel() -> CategoryViewModel
     func makeHeadLineViewModel() -> HeadLineViewModel
     func makeArticleViewModel(article: Article) -> ArticleDetailViewModel
 }
@@ -19,6 +20,10 @@ struct AppDIContainerImpl: AppDIContainer {
     
     init(dependencies: Dependency) {
         self.dependencies = dependencies
+    }
+    
+    func makeCategoryViewModel() -> CategoryViewModel {
+        CategoryViewModel()
     }
     
     func makeHeadLineViewModel() -> HeadLineViewModel {

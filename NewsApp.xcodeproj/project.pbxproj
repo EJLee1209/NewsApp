@@ -55,6 +55,12 @@
 		CF7B38B22B5B824E00EFE6BD /* ArticleDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7B38B12B5B824E00EFE6BD /* ArticleDetailViewController.swift */; };
 		CF7B38B42B5B82C500EFE6BD /* ArticleDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7B38B32B5B82C500EFE6BD /* ArticleDetailCoordinator.swift */; };
 		CF7B38B62B5B84FA00EFE6BD /* ArticleDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7B38B52B5B84FA00EFE6BD /* ArticleDetailViewModel.swift */; };
+		CF7B38BB2B5B8D8B00EFE6BD /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7B38BA2B5B8D8B00EFE6BD /* CategoryViewModel.swift */; };
+		CF7B38BD2B5B925200EFE6BD /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7B38BC2B5B925200EFE6BD /* CategoryViewController.swift */; };
+		CF7B38BF2B5B92A400EFE6BD /* CategoryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7B38BE2B5B92A400EFE6BD /* CategoryCoordinator.swift */; };
+		CF7B38C22B5B973700EFE6BD /* ViewValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7B38C12B5B973700EFE6BD /* ViewValue.swift */; };
+		CF7B38C42B5B97C800EFE6BD /* ItemCategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7B38C32B5B97C800EFE6BD /* ItemCategoryViewModel.swift */; };
+		CF7B38C62B5B98B200EFE6BD /* ItemCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7B38C52B5B98B200EFE6BD /* ItemCategoryCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,6 +129,12 @@
 		CF7B38B12B5B824E00EFE6BD /* ArticleDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailViewController.swift; sourceTree = "<group>"; };
 		CF7B38B32B5B82C500EFE6BD /* ArticleDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailCoordinator.swift; sourceTree = "<group>"; };
 		CF7B38B52B5B84FA00EFE6BD /* ArticleDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailViewModel.swift; sourceTree = "<group>"; };
+		CF7B38BA2B5B8D8B00EFE6BD /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
+		CF7B38BC2B5B925200EFE6BD /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
+		CF7B38BE2B5B92A400EFE6BD /* CategoryCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCoordinator.swift; sourceTree = "<group>"; };
+		CF7B38C12B5B973700EFE6BD /* ViewValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewValue.swift; sourceTree = "<group>"; };
+		CF7B38C32B5B97C800EFE6BD /* ItemCategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCategoryViewModel.swift; sourceTree = "<group>"; };
+		CF7B38C52B5B98B200EFE6BD /* ItemCategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -237,7 +249,7 @@
 			isa = PBXGroup;
 			children = (
 				CF3FAE6F2B5A6E93000E90E1 /* Flow */,
-				CF3FAE5E2B5A6D2D000E90E1 /* ArticleScene */,
+				CF3FAE5E2B5A6D2D000E90E1 /* Scene */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -255,6 +267,7 @@
 		CF3FAE5B2B5A6CDE000E90E1 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				CF7B38C02B5B972D00EFE6BD /* Constant */,
 				CF3FAEC22B5AB23C000E90E1 /* Extension */,
 				CF3FAEBD2B5AB11D000E90E1 /* Components */,
 				CF3FAEA52B5A9443000E90E1 /* Layer */,
@@ -283,14 +296,15 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
-		CF3FAE5E2B5A6D2D000E90E1 /* ArticleScene */ = {
+		CF3FAE5E2B5A6D2D000E90E1 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				CF7B38B72B5B8D7100EFE6BD /* Category */,
 				CF3FAE602B5A6D60000E90E1 /* HeadLine */,
 				CF3FAE622B5A6D76000E90E1 /* SearchResult */,
 				CF3FAE6E2B5A6E6B000E90E1 /* Detail */,
 			);
-			path = ArticleScene;
+			path = Scene;
 			sourceTree = "<group>";
 		};
 		CF3FAE602B5A6D60000E90E1 /* HeadLine */ = {
@@ -401,6 +415,7 @@
 			isa = PBXGroup;
 			children = (
 				CF3FAE6C2B5A6E40000E90E1 /* Coordinator.swift */,
+				CF7B38BE2B5B92A400EFE6BD /* CategoryCoordinator.swift */,
 				CF3FAE722B5A6EBC000E90E1 /* HeadLineCoordinator.swift */,
 				CF7B38B32B5B82C500EFE6BD /* ArticleDetailCoordinator.swift */,
 			);
@@ -518,6 +533,41 @@
 				CF3FAEC32B5AB245000E90E1 /* String+.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		CF7B38B72B5B8D7100EFE6BD /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				CF7B38B82B5B8D7800EFE6BD /* View */,
+				CF7B38B92B5B8D7C00EFE6BD /* ViewModel */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		CF7B38B82B5B8D7800EFE6BD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CF7B38BC2B5B925200EFE6BD /* CategoryViewController.swift */,
+				CF7B38C52B5B98B200EFE6BD /* ItemCategoryCollectionViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CF7B38B92B5B8D7C00EFE6BD /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				CF7B38BA2B5B8D8B00EFE6BD /* CategoryViewModel.swift */,
+				CF7B38C32B5B97C800EFE6BD /* ItemCategoryViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		CF7B38C02B5B972D00EFE6BD /* Constant */ = {
+			isa = PBXGroup;
+			children = (
+				CF7B38C12B5B973700EFE6BD /* ViewValue.swift */,
+			);
+			path = Constant;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -666,14 +716,17 @@
 				CF3FAE8C2B5A8E54000E90E1 /* HttpResponseStatus.swift in Sources */,
 				CF3FAE992B5A90C0000E90E1 /* HeadLineCategory.swift in Sources */,
 				CF3FAE972B5A90A6000E90E1 /* ArticleSortType.swift in Sources */,
+				CF7B38BD2B5B925200EFE6BD /* CategoryViewController.swift in Sources */,
 				CF3FAEA32B5A9423000E90E1 /* ViewState.swift in Sources */,
 				CF3FAE7F2B5A7844000E90E1 /* ArticleDTO.swift in Sources */,
 				CF7B38B02B5B806200EFE6BD /* AppDIContainer.swift in Sources */,
 				CF3FAE7B2B5A7623000E90E1 /* Article.swift in Sources */,
 				CF3FAE292B5A6985000E90E1 /* SceneDelegate.swift in Sources */,
 				CF3FAE9B2B5A90CF000E90E1 /* HeadLineCountry.swift in Sources */,
+				CF7B38BB2B5B8D8B00EFE6BD /* CategoryViewModel.swift in Sources */,
 				CF3FAE872B5A7903000E90E1 /* ApiClientService.swift in Sources */,
 				CF3FAEAE2B5A974A000E90E1 /* EndPoint.swift in Sources */,
+				CF7B38BF2B5B92A400EFE6BD /* CategoryCoordinator.swift in Sources */,
 				CF3FAE732B5A6EBC000E90E1 /* HeadLineCoordinator.swift in Sources */,
 				CF3FAEC42B5AB245000E90E1 /* String+.swift in Sources */,
 				CF3FAE812B5A784E000E90E1 /* SourceDTO.swift in Sources */,
@@ -684,6 +737,7 @@
 				CF3FAE852B5A78F0000E90E1 /* ArticleRepository.swift in Sources */,
 				CF3FAEAA2B5A946D000E90E1 /* BaseViewModel.swift in Sources */,
 				CF7B38B42B5B82C500EFE6BD /* ArticleDetailCoordinator.swift in Sources */,
+				CF7B38C42B5B97C800EFE6BD /* ItemCategoryViewModel.swift in Sources */,
 				CF3FAEB52B5AA6A8000E90E1 /* ItemHeadLineViewModel.swift in Sources */,
 				CF3FAE7D2B5A7739000E90E1 /* ResultArticleDTO.swift in Sources */,
 				CF3FAE952B5A909D000E90E1 /* SearchIn.swift in Sources */,
@@ -691,10 +745,12 @@
 				CF3FAEC62B5AB28C000E90E1 /* ApiClientServiceImpl.swift in Sources */,
 				CF3FAE772B5A731B000E90E1 /* SearchResultViewController.swift in Sources */,
 				CF3FAE9D2B5A91B3000E90E1 /* ArticleRepositoryImpl.swift in Sources */,
+				CF7B38C62B5B98B200EFE6BD /* ItemCategoryCollectionViewCell.swift in Sources */,
 				CF3FAEC12B5AB151000E90E1 /* MessageDisplayable.swift in Sources */,
 				CF3FAE832B5A78B3000E90E1 /* ResultArticleDTO+Mapper.swift in Sources */,
 				CF3FAE9F2B5A921F000E90E1 /* LoadHeadLineArticlesUseCase.swift in Sources */,
 				CF3FAEBF2B5AB132000E90E1 /* SpinnerDisplayable.swift in Sources */,
+				CF7B38C22B5B973700EFE6BD /* ViewValue.swift in Sources */,
 				CF3FAE8E2B5A900E000E90E1 /* ArticleQuery.swift in Sources */,
 				CF3FAEA12B5A9310000E90E1 /* HeadLineViewModel.swift in Sources */,
 				CF3FAE752B5A6F0A000E90E1 /* HeadLineViewController.swift in Sources */,
